@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from apps import manage_post
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -126,6 +128,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIR = [
+    'manage_post/static',
+    'user/static'
+]
+
+#Location of static files
+STATIC_ROOT = BASE_DIR / 'static'
 
 #public url for media file
 MEDIA_URL = '/media/'
