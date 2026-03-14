@@ -3,11 +3,19 @@
 venv/
 env/
 
+static/
+
 *.sqlite3
 
 # Archivos de PyCharm / IDEs
 .idea/
 .vscode/
+
+# Django collected static files
+Blog/static/
+
+# Media uploads
+Blog/media/
 
 # Python cache
 __pycache__/
