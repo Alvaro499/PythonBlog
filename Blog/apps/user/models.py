@@ -1,3 +1,8 @@
+# "models" import:
+    # model.save()
+    # model.delete()
+    # model.objects.get()
+    # model.objects.filter()
 from django.db import models
 
 # Allow us to extract the EntityUser by default created at the begining

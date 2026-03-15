@@ -40,15 +40,15 @@
                     {% endif %}
 
                     <!-- Botón de salir -->
-                    {% comment %}
+
                     <li>
                         <a href="{% url 'logout' %}" class="loguot">Salir</a>
                     </li>
-                    {% endcomment %}
                 </ul>
                 {% else %}
                     <ul>
                         <li>
+                            <!-- We only decide what elements show to the user based on URL -->
                             {% url 'login' as url_login %}
                             {% url 'register' as url_register %}
 
