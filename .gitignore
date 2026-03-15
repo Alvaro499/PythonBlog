@@ -1,7 +1,6 @@
 # Entorno virtual
 .venv/
 venv/
-env/
 
 static/
 
@@ -10,6 +9,14 @@ static/
 # Archivos de PyCharm / IDEs
 .idea/
 .vscode/
+
+# .ENV
+.env
+.env.*
+*.pem
+*.key
+.aws/
+.ssh/
 
 # Django collected static files
 Blog/static/
