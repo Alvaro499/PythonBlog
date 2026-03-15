@@ -147,6 +147,9 @@ MEDIA_URL = '/media/'
 # media file location
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Django will look for these inside of "urls.py"
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
