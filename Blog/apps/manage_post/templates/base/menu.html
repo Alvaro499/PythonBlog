@@ -13,9 +13,7 @@
 
                     <li>
                         <!-- Imagen del usuario -->
-                        {% if request.user.profile %}
-
-
+                        {% if request.user.profile and request.user.profile.photo.name %}
                             <img src="{{ request.user.profile.photo.url }}" alt="Profile"
                                  class="img-profile">
                         {% else %}

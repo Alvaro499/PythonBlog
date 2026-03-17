@@ -12,7 +12,7 @@ class CommentForm(forms.ModelForm):
 
     value = forms.ChoiceField(label="Calification",
                               choices=CHOICES,
-                              widget=forms.Textarea(attrs={'rows':5, 'cols':70, 'placeholder': 'Enter your comments here'}))
+                              widget=forms.RadioSelect())
 
     class Meta:
         model = Rating

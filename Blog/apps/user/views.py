@@ -9,7 +9,7 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from apps.user.forms import SignUpForm, LoginForm, UserForm, ProfileForm
 
-from user.models import Profile
+from apps.user.models import Profile
 
 #Overrida tag
 from typing import override
