@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 
 # Views (they include POST, GET, DELETE...)
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, DeleteView
 from django.contrib.auth.views import LoginView
 
 from django.urls import reverse_lazy
@@ -14,6 +14,8 @@ from apps.user.models import Profile
 #Overrida tag
 from typing import override
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class SignUpView(CreateView):
 
@@ -70,3 +72,11 @@ class UserUpdateView(LoginRequiredMixin, TemplateView):
             Profile.objects.create(user=request.user)
         return self.post(request, *args, **kwargs)
 
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        return User.objects.get(id=self.request.user.id)
