@@ -27,11 +27,9 @@
                     </li>
 
                     <!-- Botón de editar perfil -->
-                    {% comment %}
                     <li>
                         <a href="{% url 'edit_user' %}" class="btn-edit-profile">Editar perfil</a>
                     </li>
-                    {% endcomment %}
                     <!-- Verificar si el usuario es staff -->
                     {% if request.user.is_staff == True %}
                         <li>
