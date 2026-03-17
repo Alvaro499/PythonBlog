@@ -11,6 +11,7 @@ User = get_user_model()
 class IndexView(ListView):
     #Django execute the encapsulated query methods (from This one's father)
     model = Article
+    template_name = 'manage_post/index.html'
 
     # we override the orignial get_context_method
     def get_context_data(self, **kwargs):
@@ -29,6 +30,9 @@ class CategoryDetailView(DetailView):
     #Django execute the encapsulated query methods (from This one's father)
     #DetailView is special, it gets data from URL
     model = Category
+
+    template_name = 'manage_post/category_detail.html'
+
     #we change the key name
     context_object_name = 'category'
 
@@ -46,11 +50,15 @@ class CategoryDetailView(DetailView):
 
 class ListAllCategoriesView(ListView):
     model = Category
+    template_name = 'manage_post/category_list.html'
     context_object_name = 'categories'
 
 #Multiple Inheritance
 class ShowPostDetailView(FormMixin, DetailView):
     model = Article
+
+    template_name = 'manage_post/article_detail.html'
+
     form_class = CommentForm
     context_object_name = 'article'
 
