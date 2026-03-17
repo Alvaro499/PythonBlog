@@ -5,6 +5,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from django.contrib.auth import get_user_model
+from apps.user.models import Profile
 
 User = get_user_model()
 
@@ -48,4 +49,37 @@ class LoginForm(AuthenticationForm):
         fields = [
             'username',
             'password'
+        ]
+
+
+class UserForm(forms.ModelForm):
+
+    username = forms.CharField(help_text=None,
+                               label='Username')
+    full_name = forms.CharField(help_text=None,
+                                label='Full Name')
+    email = forms.EmailField(help_text=None,
+                             label='New Email')
+
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'full_name',
+            'email',
+        ]
+
+
+class ProfileForm(forms.ModelForm):
+
+    photo = forms.ImageField(label="Photo",
+                             help_text=None,
+                             required=False,
+                             widget=forms.FileInput())
+
+    class Meta:
+        model = Profile
+        fields = [
+            'photo',
         ]
