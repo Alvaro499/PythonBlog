@@ -2,7 +2,7 @@
 from django import forms
 
 #it contains all django logic forms (passwords, errors, validations)
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 
 from django.contrib.auth import get_user_model
 from apps.user.models import Profile
@@ -82,4 +82,14 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = [
             'photo',
+        ]
+
+
+class PasswordChangingForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = [
+            'old_password',
+            'new_password1',
+            'new_password2',
         ]
