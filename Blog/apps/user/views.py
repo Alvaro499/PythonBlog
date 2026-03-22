@@ -1,13 +1,14 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 
 # Views (they include POST, GET, DELETE...)
 from django.views.generic import CreateView, TemplateView, DeleteView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 
 from django.urls import reverse_lazy
-from apps.user.forms import SignUpForm, LoginForm, UserForm, ProfileForm
+from apps.user.forms import SignUpForm, LoginForm, UserForm, ProfileForm, PasswordChangingForm
 
 from apps.user.models import Profile
 
@@ -80,3 +81,10 @@ class UserDeleteView(DeleteView):
 
     def get_object(self, queryset=None):
         return User.objects.get(id=self.request.user.id)
+
+
+
+class PasswordsChangeView(LoginRequiredMixin, PasswordChangeView):
+    login_url = 'login'
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('index')
