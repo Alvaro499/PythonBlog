@@ -4,13 +4,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 
 # Views (they include POST, GET, DELETE...)
-from django.views.generic import CreateView, TemplateView, DeleteView
+from django.views.generic import CreateView, TemplateView, DeleteView, DetailView
 from django.contrib.auth.views import LoginView, PasswordChangeView
 
 from django.urls import reverse_lazy
+
+from apps.manage_post.models import Article, Category
 from apps.user.forms import SignUpForm, LoginForm, UserForm, ProfileForm, PasswordChangingForm
 
-from apps.user.models import Profile
+from apps.user.models import Profile, User
 
 #Overrida tag
 from typing import override
@@ -88,3 +90,15 @@ class PasswordsChangeView(LoginRequiredMixin, PasswordChangeView):
     login_url = 'login'
     form_class = PasswordChangingForm
     success_url = reverse_lazy('index')
+
+class ViewProfile(LoginRequiredMixin, DetailView):
+
+    model = User
+    template_name = 'user/profile.html'
+    context_object_name = 'profile_user'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Article.objects.filter(user_id=self.object)
+        context['navbar_category'] = Category.objects.filter(featured=True)
+        return context
