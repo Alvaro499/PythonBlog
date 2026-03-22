@@ -68,7 +68,7 @@ class UserUpdateView(LoginRequiredMixin, TemplateView):
         # If there are errors, we show the page again using the same forms, so the correct data stays in the fields
         # and the errors are displayed.
         context = self.get_context_data(user_form=user_form, profile_form=profile_form)
-        return render(request, context)
+        return render(request,'profile/edit_profile.html',context)
 
     def get(self, request, *args, **kwargs):
         if Profile.objects.filter(user=request.user).exists() == False:
