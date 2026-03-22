@@ -1,0 +1,102 @@
+<!-- Heredar de base -->
+{% extends 'base/base.html' %}
+
+<!-- Cargar archivos estáticos -->
+{% load static %}
+
+<!-- Bloque css -->
+{% block css %}
+<link href="{% static 'user/css/style_profile.css' %}" rel="stylesheet" type="text/css">
+{% endblock css %}
+
+<!-- Bloque título -->
+{% block title %} Perfil - {{ profile_user.full_name }} {% endblock title %}
+
+<!-- Bloque contenido -->
+{% block content %}
+
+<div class="profile-container">
+    <!-- Información del perfil -->
+    <div class="profile-header">
+        <div class="profile-image">
+            {% if profile_user.profile.photo %}
+                <img src="{{ profile_user.profile.photo.url }}" alt="{{ profile_user.full_name }}" class="profile-pic">
+            {% else %}
+                <img src="{% static 'base/image/Default/default-profile.png' %}" alt="Default Profile" class="profile-pic">
+            {% endif %}
+        </div>
+
+        <div class="profile-info">
+            <h1 class="profile-name">{{ profile_user.full_name }}</h1>
+            <p class="profile-username">@{{ profile_user.username }}</p>
+            
+            {% if profile_user.profile.profession %}
+                <p class="profile-profession">{{ profile_user.profile.profession }}</p>
+            {% endif %}
+
+            {% if profile_user.profile.about %}
+                <p class="profile-about">{{ profile_user.profile.about }}</p>
+            {% endif %}
+
+            <!-- Redes sociales -->
+            <div class="profile-social">
+                {% if profile_user.profile.twitter %}
+                    <a href="{{ profile_user.profile.twitter }}" target="_blank" class="social-link twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                {% endif %}
+
+                {% if profile_user.profile.linkedin %}
+                    <a href="{{ profile_user.profile.linkedin }}" target="_blank" class="social-link linkedin">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                {% endif %}
+
+                {% if profile_user.profile.facebook %}
+                    <a href="{{ profile_user.profile.facebook }}" target="_blank" class="social-link facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if profile_user.profile.birthday %}
+                <p class="profile-birthday">
+                    <strong>Fecha de nacimiento:</strong> {{ profile_user.profile.birthday|date:"d/m/Y" }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Artículos del usuario -->
+    <div class="profile-posts">
+        <h2 class="posts-title">Artículos publicados ({{ posts|length }})</h2>
+        
+        {% if posts %}
+            <div class="article-container">
+                {% for article in posts %}
+                    <article class="article">
+                        {% if article.image %}
+                            <img src="{{ article.image.url }}" alt="{{ article.title }}" class="img">
+                        {% else %}
+                            <img src="{% static 'base/image/Default/default-article.png' %}" alt="Default" class="img">
+                        {% endif %}
+                        
+                        <div class="card-body">
+                            <a href="{% url 'post' article.slug %}">
+                                <h3 class="title">{{ article.title|truncatewords:13 }}</h3>
+                            </a>
+                            <p class="introduction">{{ article.introduction|truncatewords:25 }}</p>
+                            <div class="article-meta">
+                                <span class="date">{{ article.created_at|date:"d/m/Y" }}</span>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-posts">Este usuario no ha publicado artículos aún.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

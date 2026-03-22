@@ -11,10 +11,10 @@ User = get_user_model()
 
 class SignUpForm(UserCreationForm):
 
-    username = forms.CharField(help_text=None,
+    username = forms.CharField(help_text='',
                                label=False,
                                widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    full_name = forms.CharField(help_text=None,
+    full_name = forms.CharField(help_text='',
                                label=False,
                                 widget=forms.TextInput(attrs={'placeholder': 'Full Name'}))
     email = forms.EmailField(label=False,
@@ -37,11 +37,11 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
 
     username = forms.CharField(label=False,
-                               help_text=None,
+                               help_text='',
                                widget=forms.TextInput(attrs={'placeholder': 'Username'})
                                )
     password = forms.CharField(label=False,
-                               help_text=None,
+                               help_text='',
                                widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
                                )
     class Meta:
@@ -54,11 +54,11 @@ class LoginForm(AuthenticationForm):
 
 class UserForm(forms.ModelForm):
 
-    username = forms.CharField(help_text=None,
+    username = forms.CharField(help_text='',
                                label='Username')
-    full_name = forms.CharField(help_text=None,
+    full_name = forms.CharField(help_text='',
                                 label='Full Name')
-    email = forms.EmailField(help_text=None,
+    email = forms.EmailField(help_text='',
                              label='New Email')
 
 
@@ -74,7 +74,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
 
     photo = forms.ImageField(label="Photo",
-                             help_text=None,
+                             help_text='',
                              required=False,
                              widget=forms.FileInput())
 
@@ -82,8 +82,13 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = [
             'photo',
+            'profession',
+            'about',
+            'birthday',
+            'twitter',
+            'linkedin',
+            'facebook'
         ]
-
 
 class PasswordChangingForm(PasswordChangeForm):
     class Meta:

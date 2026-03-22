@@ -20,7 +20,7 @@
         <h2>{{ article.title }}</h2>
     </div>
     <div class="post-introduction line">
-        <p{{ article.introduction }}</p>
+        <p></p>{{ article.introduction }}</p>
     </div>
     <div class="post-author line">
         <!-- Imagen del autor del artículo -->
@@ -30,7 +30,7 @@
         <img src="{% static 'base/image/Default/default-user.png' %}" class="img-author" alt="Autor Post">
         {% endif %}
         <!-- Redirigir al perfil del autor -->
-        <span>Autor: <a href="#">{{ article.user_id.full_name }}</a></span>
+        <span>Autor: <a href="{% url 'view_profile' article.user_id.id %}">{{ article.user_id.full_name|default:article.user_id.username }}</a></span>
     </div>
     <hr>
     <div class="post-image">
